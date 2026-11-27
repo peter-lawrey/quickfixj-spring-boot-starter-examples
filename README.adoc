@@ -61,6 +61,8 @@ If you want to see the failover in action, kill the first server container and s
 
 === Running the Spring Boot 3 client and server
 
+The two Spring Boot 3 examples use QuickFIX/J 2.3.3 for the engine and message dictionaries, with Apache MINA 2.2.9 for FIX transport. The packaged server and client can interoperate with a peer on QuickFIX/J 2.3.1.
+
 Build the pair with a Java 17 or 21 JDK from the repository root:
 
 ----
@@ -84,5 +86,14 @@ avoid formatting a second copy of every FIX message for the application log.
 Session lifecycle events and QuickFIX/J's configured protocol logs remain
 available. The default is `INFO` for interactive examples.
 
+To give each FIX session its own inbound callback thread, set
+`QUICKFIXJ_CLIENT_CONCURRENT_ENABLED=true` on the client. The starter selects
+QuickFIX/J's `ThreadedSocketInitiator`. The default `SocketInitiator` shares
+a dispatcher across the client's sessions. The server example already uses
+`ThreadedSocketAcceptor`. In per-session mode callbacks for different
+sessions may execute concurrently.
+
 Run `python3 scripts/check-spring3-pair.py` after packaging to check all six
 logons on temporary ports and stores. It starts and stops both peers.
+
+Measure both dispatch modes and confirm the recorded messages using the link:benchmarks/session-round-trip/README.md[two-session JLBH benchmark].
