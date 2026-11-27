@@ -20,6 +20,8 @@ management:
         include: quickfixjserver
 
 logging:
+  level:
+    quickfixj.example.messages: ${QUICKFIXJ_MESSAGE_LOG_LEVEL:INFO}
   file:
     name: logs/server.log
   pattern:

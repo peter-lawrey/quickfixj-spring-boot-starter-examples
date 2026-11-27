@@ -11,6 +11,10 @@
 	<name>QuickFixJ Spring Boot Starter Examples :: Simple Client and Server using Config String</name>
 	<description>QuickFixJ Spring Boot Starter Simple Client and Server using Config String</description>
 
+	<properties>
+		<spring-boot.version>3.2.2</spring-boot.version>
+	</properties>
+
 	<dependencyManagement>
 		<dependencies>
 			<!-- Spring Boot -->
@@ -18,7 +22,7 @@
 				<!-- Import dependency management from Spring Boot -->
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-dependencies</artifactId>
-				<version>3.2.2</version>
+				<version>${spring-boot.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>

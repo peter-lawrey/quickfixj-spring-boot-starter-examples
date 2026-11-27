@@ -28,6 +28,7 @@ import quickfix.fix41.MessageCracker;
 public class ClientApplicationAdapter implements Application {
 
 	private static final Logger log = LoggerFactory.getLogger(ClientApplicationAdapter.class);
+	private static final Logger messages = LoggerFactory.getLogger("quickfixj.example.messages");
 
 	private final MessageCracker messageCracker;
 
@@ -37,12 +38,12 @@ public class ClientApplicationAdapter implements Application {
 
 	@Override
 	public void fromAdmin(Message message, SessionID sessionId) {
-		log.info("fromAdmin: Message={}, SessionId={}", message, sessionId);
+		messages.info("fromAdmin: Message={}, SessionId={}", message, sessionId);
 	}
 
 	@Override
 	public void fromApp(Message message, SessionID sessionId) {
-		log.info("fromApp: Message={}, SessionId={}", message, sessionId);
+		messages.info("fromApp: Message={}, SessionId={}", message, sessionId);
 
 		try {
 			messageCracker.crack(message, sessionId);
@@ -68,11 +69,11 @@ public class ClientApplicationAdapter implements Application {
 
 	@Override
 	public void toAdmin(Message message, SessionID sessionId) {
-		log.info("toAdmin: Message={}, SessionId={}", message, sessionId);
+		messages.info("toAdmin: Message={}, SessionId={}", message, sessionId);
 	}
 
 	@Override
 	public void toApp(Message message, SessionID sessionId) {
-		log.info("toApp: Message={}, SessionId={}", message, sessionId);
+		messages.info("toApp: Message={}, SessionId={}", message, sessionId);
 	}
 }
