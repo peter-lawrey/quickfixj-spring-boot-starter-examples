@@ -58,3 +58,31 @@ Go to `docker-server-client-with-failover/src/main/docker` and run:
 If you want to see the failover in action, kill the first server container and see the client reconnecting to the second server after around a minute or so:
 
     docker rm -f quickfixj-spring-boot-server
+
+=== Running the Spring Boot 3 client and server
+
+Build the pair with a Java 17 or 21 JDK from the repository root:
+
+----
+mvn -pl simple-client-spring-3,simple-server-spring-3 -am clean package
+java -jar simple-server-spring-3/target/simple-server-spring-3.jar
+----
+
+Start the client in another terminal:
+
+----
+java -jar simple-client-spring-3/target/simple-client-spring-3.jar
+----
+
+The pair logs on over six FIX sessions. Set `QUICKFIXJ_SERVER_CONFIG_FILE` and
+`QUICKFIXJ_CLIENT_CONFIG_FILE` to `file:/absolute/path/to/settings.cfg` for
+custom ports or stores. The client continues to accept the older
+`QUIICKFIXJ_CLIENT_CONFIG_FILE` spelling.
+
+For a busy peer, set `QUICKFIXJ_MESSAGE_LOG_LEVEL=WARN` on both processes to
+avoid formatting a second copy of every FIX message for the application log.
+Session lifecycle events and QuickFIX/J's configured protocol logs remain
+available. The default is `INFO` for interactive examples.
+
+Run `python3 scripts/check-spring3-pair.py` after packaging to check all six
+logons on temporary ports and stores. It starts and stops both peers.

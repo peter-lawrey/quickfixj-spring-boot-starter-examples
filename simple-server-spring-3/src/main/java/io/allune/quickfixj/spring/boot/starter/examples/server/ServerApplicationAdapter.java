@@ -24,15 +24,16 @@ import quickfix.SessionID;
 public class ServerApplicationAdapter implements Application {
 
 	private static final Logger log = LoggerFactory.getLogger(ServerApplicationAdapter.class);
+	private static final Logger messages = LoggerFactory.getLogger("quickfixj.example.messages");
 
 	@Override
 	public void fromAdmin(Message message, SessionID sessionId) {
-		log.info("fromAdmin: Message={}, SessionId={}", message, sessionId);
+		messages.info("fromAdmin: Message={}, SessionId={}", message, sessionId);
 	}
 
 	@Override
 	public void fromApp(Message message, SessionID sessionId) {
-		log.info("fromApp: Message={}, SessionId={}", message, sessionId);
+		messages.info("fromApp: Message={}, SessionId={}", message, sessionId);
 	}
 
 	@Override
@@ -52,11 +53,11 @@ public class ServerApplicationAdapter implements Application {
 
 	@Override
 	public void toAdmin(Message message, SessionID sessionId) {
-		log.info("toAdmin: Message={}, SessionId={}", message, sessionId);
+		messages.info("toAdmin: Message={}, SessionId={}", message, sessionId);
 	}
 
 	@Override
 	public void toApp(Message message, SessionID sessionId) {
-		log.info("toApp: Message={}, SessionId={}", message, sessionId);
+		messages.info("toApp: Message={}, SessionId={}", message, sessionId);
 	}
 }
