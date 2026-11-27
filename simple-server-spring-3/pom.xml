@@ -23,6 +23,16 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>org.quickfixj</groupId>
+				<artifactId>quickfixj-core</artifactId>
+				<version>${spring3.quickfixj.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.quickfixj</groupId>
+				<artifactId>quickfixj-messages-all</artifactId>
+				<version>${spring3.quickfixj.version}</version>
+			</dependency>
 			<!-- Spring Boot -->
 			<dependency>
 				<!-- Import dependency management from Spring Boot -->
